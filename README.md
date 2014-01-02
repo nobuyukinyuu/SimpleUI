@@ -1,6 +1,6 @@
-![](http://i.imgur.com/acs0W74.png)
-
 SimpleUI is a basic, portable, and modular UI library for Monkey.  It serves as a UI base for projects that don't need a full library.
+
+![](http://i.imgur.com/acs0W74.png)
 
 ##Features
 * Input and interface are separate, allowing (in theory) any control scheme.
