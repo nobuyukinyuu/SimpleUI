@@ -22,7 +22,7 @@ Class ScrollablePanel Extends Widget
 	Field childInput:PanelPointer
 	
 	'Flags
-	Field __endlessX:Bool = True, __endlessY:Bool = True  'Uncap the XY boundaries
+	Field __endlessX:Bool, __endlessY:Bool   'Uncap the XY boundaries
 	Field __zLowerLimit:Float = 0.1, __zUpperLimit:Float = 3
 	
 	Const FRICTION:Float = 0.08  'Amount of friction to apply to scroll control

@@ -7,6 +7,7 @@ Import SimpleUI.common
 'The following are not included in the common init, add them as necessary.
 Import SimpleUI.widgetManager
 Import SimpleUI.Scrollers
+Import SimpleUI.panel
 
 Function Main:Int()
 	New Game()
@@ -24,6 +25,8 @@ Class Game Extends App
 	Field button:PushButton[3]
 	'A scroller.
 	Field scroll:EndlessScroller
+	'A 2d panel.
+	Field myPanel:TestPanel
 	
 	Method OnCreate:Int()
 		SetUpdateRate 60
@@ -55,6 +58,16 @@ Class Game Extends App
 		Next
 		widgets.Attach(scroll)
 		
+		'Set up the panel, add a few test buttons to it.
+		myPanel = New TestPanel(32, 240, 256, 224, 640, 480, Cursor)
+		For Local i:Int = 0 Until 3
+			Local panelButton:= New PushButton(144, 72 + i * 48, 96, 32, Cursor)
+			panelButton.Text = "Button " + (i + 3)
+			
+			myPanel.Attach(panelButton)
+		Next
+		widgets.Attach(myPanel)
+		
 		Return 0
 	End Method
 	
@@ -66,14 +79,23 @@ Class Game Extends App
 
 		'Tell our widget manager "Okay, let's poll our widgets for input."		
 		widgets.PollAll()
-
+		
 		'Now let's check that input.		
 		For Local i:Int = 0 Until 3
 			If button[i].hit
 				status = "Button " + i + " hit."
 			End If			
 		Next
-
+		
+		'Here's another way to check input, in WidgetManagers and Panels
+		For Local o:Widget = EachIn myPanel.Widgets
+			Local test:PushButton = PushButton(o)
+			If test = Null Then Continue
+			If test.hit
+				status = test.Text + " hit."
+			End If
+		Next
+		
 		Return 0		
 	End Method
 	
@@ -81,14 +103,15 @@ Class Game Extends App
 		Cls(0, 16, 64)
 
 		widgets.RenderAll()
-				
+						
 		SetAlpha(0.4)
 		DrawCircle(Cursor.x, Cursor.y, 8)
 		SetAlpha(1)
 		
 		Local m:Float[] = GetMatrix()
 		DrawText(status, 0, 0)
-		Return 0
+
+	Return 0	
 	End Method
 End Class
 
@@ -114,3 +137,50 @@ End Function
 End Class
 
 
+Class TestPanel Extends ScrollablePanel
+	Method New(x:Int, y:Int, w:Int, h:Int, cw:Float, ch:Float, Input:InputPointer)
+		Super.New(x, y, w, h, cw, ch, Input)
+	End Method
+
+	
+	Method Render:Void(xOffset:Float = 0, yOffset:Float = 0)
+		Super.Render(xOffset, yOffset)
+		
+		SetAlpha(0.25)
+		If Scrolling Then DrawRect(x, y, 32, 32)
+		SetAlpha(1)
+		DrawText(cx, x, y)
+		DrawText(cy, x, y + 16)
+		
+		'draw outline box
+		DrawLine(x, y, x + w + 8, y)
+		DrawLine(x, y, x, y + h + 8)
+		DrawLine(x + w + 8, y, x + w + 8, y + h + 8)
+		DrawLine(x, y + h + 8, x + w + 8, y + h + 8)
+
+		'draw scrollbars
+		SetAlpha(0.25)
+		DrawRect(x, y + h, w, 8)
+		DrawRect(x + w, y, 8, h)
+		DrawCircle(x + PercentX * w, y + h + 4, 4)
+		DrawCircle(x + w + 4, y + PercentY * h, 4)
+		SetAlpha(1)
+	End Method
+	
+	'Summary:  Renders the content of the panel after setting the proper translation/scissor. Override this and call Super to render widgets.
+	Method RenderContent:Void(xOffset:Float = 0, yOffset:Float = 0)
+		'Note:  The origin 0,0 is considered x,y of parent panel.
+		For Local yy:Int = 0 Until ch / 32
+			For Local xx:Int = 0 Until cw / 32
+				Local odd:Int = xx + (yy & 1) & 1
+				If odd = 1 Then SetColor(128, 128, 64) Else SetColor(128, 128, 255)
+				If xx = 0 or xx = (cw / 32) - 1 Then SetColor(128, 0, 0)
+				If yy = 0 or yy = (ch / 32) - 1 Then SetColor(128, 0, 0)
+				DrawRect(xx * 32, yy * 32, 32, 32)
+				SetColor(255, 255, 255)
+			Next
+		Next
+		
+		Super.RenderContent(xOffset, yOffset)
+	End Method
+End Class

@@ -318,11 +318,14 @@ Class EndlessScroller Extends Widget
 		if Abs(cMomentum) < 0.01 Then 'Reset the control
 			cMomentum = 0
 			cOffset = Floor(cOffset+0.4) 'round
-			Scrolling = False
 			
 			'Put cOffset back in a sane place
 			cOffset = GetSaneOffset(cOffset, cellHeight * Items.Length, -cellHeight * Items.Length)
 		End If
+		
+		'Update the scrolling status.
+		Scrolling = ( Not clickStart) And Not (cMomentum = 0)
+		
 	End Method
 	
 End Class
