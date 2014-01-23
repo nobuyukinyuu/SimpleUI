@@ -89,3 +89,79 @@ Public
 	End Method
 	
 End Class
+
+'Summary:  Provides a mouse pointer which is aware of the current global scaling matrix.
+Class ScaleAwarePointer Extends MousePointer
+	Method x:Float()
+		Local m:Float[] = GetMatrix()
+		Return (MouseX() -m[4]) / m[0]
+	End Method
+	Method y:Float()
+		Local m:Float[] = GetMatrix()
+		Return (MouseY() -m[5]) / m[3]
+	End Method
+End Class
+
+
+'Summary:  For multitouch-requiring components.  Extend this if you need to.  (Work in progress 21 Dec 2013)
+Class MultiTouchPointer
+Private
+	Field Holding:Bool[16] 'Used to implement MouseUp event
+	Field _hit:Bool[16], _down:Bool[16], _up:Bool[16]
+Public
+
+	Method x:Float(finger:Int = 0)
+		Return TouchX(finger)
+	End Method
+	Method y:Float(finger:Int = 0)
+		Return TouchY(finger)
+	End Method
+	
+	Method Poll:Void()  'This method sets all of the properties to their internal values.
+		'The reason all of our input states are properties is so they can be defined in the abstract interface.
+		'When we call this method, we're telling all of its internal values to be set correctly.
+		'This method should be called each frame before checking any value.
+		
+		For Local f:Int = 0 Until 16
+			If TouchHit(f) > 0 Then
+				_hit[f] = True
+			Else
+				_hit[f] = False
+			End If 		
+			
+			If TouchDown(f) Then
+				Self.Holding[f] = True
+				_down[f] = True
+			Else 'Not holding Down
+				_down[f] = False
+				If Self.Holding[f] = True Then  'Was holding last frame.  Do Up
+					Self.Holding[f] = False
+					_up[f] = True
+				Else; _up[f] = False
+				End If 
+			End If
+			
+		Next
+			
+	End Method
+	
+	Method Hit:Bool(finger:Int = 0)
+		Return _hit[finger]
+	End Method
+	Method Down:Bool(finger:Int = 0)
+		Return _down[finger]
+	End Method
+	Method Up:Bool(finger:Int = 0)
+		Return _up[finger]
+	End Method
+
+	'Summary:  Returns how many fingers are being held down.
+	Method Fingers:Int()
+		Local result:Int
+		For Local i:Int = 0 Until 16
+			If _down[i] Then result += 1
+		Next
+		
+		Return result
+	End Method
+End Class

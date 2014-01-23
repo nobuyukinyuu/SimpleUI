@@ -29,8 +29,8 @@ Class Widget
 		Self.Input = input 
 	End Method
 
-		
-	Method Poll:Void(xOffset:Float=0, yOffset:Float=0)  'This function polls the widget to see if it should execute any methods. Don't call if not Visible.
+	'Summary:  This function polls the widget to see if it should execute any methods. Don't call if not Visible.		
+	Method Poll:Void(xOffset:Float = 0, yOffset:Float = 0)
 		Local inWidget:Bool = UI.WithinRect(Input.x, Input.y, Self.x + xOffset, Self.y + yOffset, Self.w, Self.h)
 
 		'Check input to do things.  In derived classes, you can poll the InputPointer before calling Super here.

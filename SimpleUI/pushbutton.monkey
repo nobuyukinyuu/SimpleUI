@@ -7,14 +7,16 @@ Class PushButton Extends Widget
 	Field hit:Bool 'Click event indicator
 	Field down:Bool 'MouseDown event indicator
 	Field up:Bool 'MouseUp event indicator
+	Field over:Bool 'MouseOver event indicator
 	
 	Method New(x:Float, y:Float, w:Float, h:Float, Input:InputPointer)
 		Super.New(x, y, w, h, Input)
 	End Method
 
 	Method Render:Void(xOffset:Float = 0, yOffset:Float = 0)
-		If Visible 
-			SetColor(128,128,192)
+		If Visible
+			Local b:Int; If over Then b = 16
+			SetColor(128, 128 + b, 192 + b)
 			If down Then SetColor(128, 192, 192)
 	
 			DrawRect(x + xOffset, y + yOffset, w, h)
@@ -27,6 +29,7 @@ Class PushButton Extends Widget
 		hit = False
 		down = False
 		up = False
+		over = False
 		Super.Poll(xOffset, yOffset)
 	End Method	
 
@@ -43,5 +46,9 @@ Class PushButton Extends Widget
 	Method MouseUp:Void()
 		Super.MouseUp()
 		If Visible and Enabled Then up = True
+	End Method
+	
+	Method MouseOver:Void()
+		If Visible and Enabled Then over = True
 	End Method
 End Class
