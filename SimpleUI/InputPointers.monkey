@@ -92,11 +92,11 @@ End Class
 
 'Summary:  Provides a mouse pointer which is aware of the current global scaling matrix.
 Class ScaleAwarePointer Extends MousePointer
-	Method x:Float()
+	Method x:Float() Property
 		Local m:Float[] = GetMatrix()
 		Return (MouseX() -m[4]) / m[0]
 	End Method
-	Method y:Float()
+	Method y:Float() Property
 		Local m:Float[] = GetMatrix()
 		Return (MouseY() -m[5]) / m[3]
 	End Method
@@ -104,24 +104,29 @@ End Class
 
 
 'Summary:  For multitouch-requiring components.  Extend this if you need to.  (Work in progress 21 Dec 2013)
-Class MultiTouchPointer
+Class MultiTouchPointer Implements InputPointer
 Private
 	Field Holding:Bool[16] 'Used to implement MouseUp event
 	Field _hit:Bool[16], _down:Bool[16], _up:Bool[16]
 Public
 
-	Method x:Float(finger:Int = 0)
+	'Single touch methods (InputPointer compatible)
+	Method x:Float() Property
+		Return TouchX()
+	End Method
+	Method y:Float() Property
+		Return TouchY()
+	End Method
+	
+	'Multitouch methods.
+	Method x:Float(finger:Int)
 		Return TouchX(finger)
 	End Method
-	Method y:Float(finger:Int = 0)
+	Method y:Float(finger:Int)
 		Return TouchY(finger)
 	End Method
 	
-	Method Poll:Void()  'This method sets all of the properties to their internal values.
-		'The reason all of our input states are properties is so they can be defined in the abstract interface.
-		'When we call this method, we're telling all of its internal values to be set correctly.
-		'This method should be called each frame before checking any value.
-		
+	Method Poll:Void()		
 		For Local f:Int = 0 Until 16
 			If TouchHit(f) > 0 Then
 				_hit[f] = True
@@ -144,14 +149,25 @@ Public
 		Next
 			
 	End Method
+
+	Method Hit:Bool()
+		Return _hit[0]
+	End Method
+	Method Down:Bool()
+		Return _down[0]
+	End Method
+	Method Up:Bool()
+		Return _up[0]
+	End Method
 	
-	Method Hit:Bool(finger:Int = 0)
+	'Multitouch methods	
+	Method Hit:Bool(finger:Int)
 		Return _hit[finger]
 	End Method
-	Method Down:Bool(finger:Int = 0)
+	Method Down:Bool(finger:Int)
 		Return _down[finger]
 	End Method
-	Method Up:Bool(finger:Int = 0)
+	Method Up:Bool(finger:Int)
 		Return _up[finger]
 	End Method
 
@@ -163,5 +179,26 @@ Public
 		Next
 		
 		Return result
+	End Method
+End Class
+
+'Summary:  A multitouch pointer which is aware of the matrix scale.
+Class ScaleAwareMultiTouchPointer Extends MultiTouchPointer
+	Method x:Float() Property
+		Local m:Float[] = GetMatrix()
+		Return (TouchX() -m[4]) / m[0]
+	End Method
+	Method y:Float() Property
+		Local m:Float[] = GetMatrix()
+		Return (TouchY() -m[5]) / m[3]
+	End Method
+	
+	Method x:Float(finger:Int)
+		Local m:Float[] = GetMatrix()
+		Return (TouchX(finger) - m[4]) / m[0]
+	End Method
+	Method y:Float(finger:Int)
+		Local m:Float[] = GetMatrix()
+		Return (TouchY(finger) - m[5]) / m[3]
 	End Method
 End Class
