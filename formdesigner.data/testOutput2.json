@@ -1,0 +1,164 @@
+{
+	"Widgets" : [{
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 97.0,
+			"id" : 4325376,
+			"Text" : "nira",
+			"type" : "pushbutton",
+			"w" : 99.0,
+			"x" : 107.0,
+			"y" : 64.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 163.0,
+			"id" : 1687552001,
+			"Text" : "tohara",
+			"type" : "pushbutton",
+			"w" : 118.0,
+			"x" : 294.0,
+			"y" : 189.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 62.0,
+			"id" : 1328283650,
+			"Text" : "judunoijee",
+			"type" : "pushbutton",
+			"w" : 196.0,
+			"x" : 46.0,
+			"y" : 198.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 63.0,
+			"id" : 222298115,
+			"Text" : "tigaturi",
+			"type" : "pushbutton",
+			"w" : 224.0,
+			"x" : 312.0,
+			"y" : 75.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 37.0,
+			"id" : 2005794820,
+			"Text" : "riajune",
+			"type" : "pushbutton",
+			"w" : 153.0,
+			"x" : 95.0,
+			"y" : 409.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 88.0,
+			"id" : 1677328389,
+			"Text" : "reerii",
+			"type" : "pushbutton",
+			"w" : 131.0,
+			"x" : 477.0,
+			"y" : 334.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 81.0,
+			"id" : 400424966,
+			"Text" : "pionahihe",
+			"type" : "pushbutton",
+			"w" : 200.0,
+			"x" : 266.0,
+			"y" : 371.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 125.0,
+			"id" : 815398919,
+			"Text" : "kura",
+			"type" : "pushbutton",
+			"w" : 224.0,
+			"x" : 28.0,
+			"y" : 268.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 75.0,
+			"id" : 1597767688,
+			"Text" : "boujeog",
+			"type" : "pushbutton",
+			"w" : 189.0,
+			"x" : 419.0,
+			"y" : 157.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 86.0,
+			"id" : 1647050761,
+			"Text" : "hije",
+			"type" : "pushbutton",
+			"w" : 189.0,
+			"x" : 418.0,
+			"y" : 237.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 37.0,
+			"id" : 499515402,
+			"Text" : "rehitita",
+			"type" : "pushbutton",
+			"w" : 177.0,
+			"x" : 229.0,
+			"y" : 145.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 71.0,
+			"id" : 1588461579,
+			"Text" : "jutousio",
+			"type" : "pushbutton",
+			"w" : 90.0,
+			"x" : 212.0,
+			"y" : 62.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 65.0,
+			"id" : 1630666764,
+			"Text" : "herorujog",
+			"type" : "pushbutton",
+			"w" : 44.0,
+			"x" : 244.0,
+			"y" : 193.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 99.0,
+			"id" : 328073229,
+			"Text" : "jujeojikea",
+			"type" : "pushbutton",
+			"w" : 33.0,
+			"x" : 255.0,
+			"y" : 265.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 25.0,
+			"id" : 1865023502,
+			"Text" : "jikuru",
+			"type" : "pushbutton",
+			"w" : 190.0,
+			"x" : 32.0,
+			"y" : 166.0
+		}, {
+			"Enabled" : true,
+			"Visible" : true,
+			"h" : 97.0,
+			"id" : 1035993103,
+			"Text" : "togi",
+			"type" : "pushbutton",
+			"w" : 74.0,
+			"x" : 24.0,
+			"y" : 61.0
+		}
+	]
+}

@@ -1,4 +1,5 @@
 Import mojo
+Import brl.json
 
 'Summary:  Generic namespace for various SimpleUI functions.
 Class UI
@@ -64,4 +65,18 @@ Class UI
 		Return startValue + (endValue - startValue) * percent
 	End
 	
+	'Summary:  Generates a unique ID for widgets.
+	Function GenerateID:Int(salt:Int)
+		'To generate a unique ID, we must find a number that's unlikely to be repeated no matter how many widgets we add here.
+		'Doing this in int32 space is difficult, so we comprimise by attempting to fill most of the values in the upper limit
+		'of this space.  14 bits of data (not counting the sign bit) are allocated high and assigned to a random number, then
+		'masked against the current stack size.  This should provide unique values for at least 100,000 widgets, while giving
+		'only a 1-in-16382 chance of an auto ID collision if the stack size shrinks and stack length is repeated again.
+
+		'All negative numbers (except for -1), and numbers from 0-$1FFFF are all valid ID's that can be manually assigned
+		'with no chance of a collision by the auto-assignment.
+				
+		Return (Rnd(1, $3FFF) Shl 17) | salt 'Auto-assign a unique widget ID. Should support >100k widgets.
+	End Function
 End Class
+

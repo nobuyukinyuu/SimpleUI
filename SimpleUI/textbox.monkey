@@ -3,6 +3,10 @@ Import InputPointers
 Import widget
 
 Class TextBox Extends Widget
+	Method type:String() Property   'The type of this widget.
+		Return "textbox"
+	End Method
+
 	Field HasFocus:Bool
 	Field skin:TextBoxSkin = New DefaultTextboxSkin()
 	Field chars:= New Stack<Int>  'Character input queue on last Poll()
@@ -86,6 +90,15 @@ Class TextBox Extends Widget
 	
 	Method Render:Void(xOffset:Float = 0, yOffset:Float = 0)
 		skin.Render(Self, xOffset, yOffset)
+	End Method
+
+	
+	'Summary:  Spawns a new TextBox for the unpacker.	
+	Method Spawn:Widget(json:String)
+		'Override this method to allow spawning of derived types.
+		Local out:= New TextBox()
+		out.UnpackJSON(json)
+		Return out
 	End Method
 End Class
 

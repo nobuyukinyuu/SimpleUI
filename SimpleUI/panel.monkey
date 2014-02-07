@@ -44,22 +44,17 @@ Class ScrollablePanel Extends Widget
 	Method Attach:Int(widget:Widget, id:Int = -1)
 		widget.Input = childInput
 	
-		'To generate a unique ID, we must find a number that's unlikely to be repeated no matter how many widgets we add here.
-		'Doing this in int32 space is difficult, so we comprimise by attempting to fill most of the values in the upper limit
-		'of this space.  14 bits of data (not counting the sign bit) are allocated high and assigned to a random number, then
-		'masked against the current stack size.  This should provide unique values for at least 100,000 widgets, while giving
-		'only a 1-in-16382 chance of an auto ID collision if the stack size shrinks and stack length is repeated again.
-
-		'All negative numbers (except for -1), and numbers from 0-$1FFFF are all valid ID's that can be manually assigned
-		'with no chance of a collision by the auto-assignment.
-				
-		If id = -1 Then id = (Rnd(1, $3FFF) Shl 17) | Widgets.Length() 'Auto-assign a unique widget ID. Should support >100k widgets.
+		If id = -1 Then id = widget.id  'Set ID to whatever the widget's ID is.
+		If id = -1 Then                 'If the widget doesn't have an ID, make one.
+			id = UI.GenerateID(Widgets.Length())
+			widget.id = id
+		End If
 		
 		Widgets.Push(widget)
 		WidgetsByID.Add(id, widget)
 		
 		Return id
-	End Method				
+	End Method
 	
 	Method MouseHit:Void()
 		'First touch.  Set origin to this location.  Set the scroll origin for the first time, also.

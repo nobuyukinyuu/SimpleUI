@@ -4,6 +4,10 @@ Import widget
 
 'Summary:  A basic button class which many controls derive from.
 Class PushButton Extends Widget
+	Method type:String() Property   'The type of this widget.
+		Return "pushbutton"
+	End Method
+
 	Field hit:Bool 'Click event indicator
 	Field down:Bool 'MouseDown event indicator
 	Field up:Bool 'MouseUp event indicator
@@ -50,5 +54,13 @@ Class PushButton Extends Widget
 	
 	Method MouseOver:Void()
 		If Visible and Enabled Then over = True
+	End Method
+	
+	'Summary:  Spawns a new PushButton for the unpacker.	
+	Method Spawn:Widget(json:String)
+		'Override this method to allow spawning of derived types.
+		Local out:= New PushButton()
+		out.UnpackJSON(json)
+		Return out
 	End Method
 End Class

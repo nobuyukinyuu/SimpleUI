@@ -8,7 +8,12 @@ Class Widget
 	Field Holding:Bool 'If holding down in the widget 
 		
   Public
-  	Field id:Int  'For tagging a widget for the widget manager.  Optional.
+	Method type:String() Property   'The type of this widget.
+		Return "widget"
+	End Method
+	
+  	Field id:Int = -1  'For tagging a widget for the widget manager.  Optional.
+	Field name:String  'For tagging a widget for the widget manager.  Optional.
 	 
 	Field x:Float, y:Float  'Location
 	Field w:Float=32, h:Float=32  'Size
@@ -80,5 +85,33 @@ Class Widget
 	
 	Method Render:Void(xOffset:Float = 0, yOffset:Float = 0)
 		'Overload me!
+	End Method
+	
+	
+	'Note:  incomplete.....  06 feb 2014
+	'Summary:  Unpacks a JSON string to the fields of this Widget.
+	Method UnpackJSON:Void(json:String)
+		'Override me in a subclass and call Super to automatically deal with this stuff.		
+		Local j:= New JsonObject(json)
+		
+		Self.id = j.GetInt("id", -1)
+		Self.name = j.GetString("name", "")
+		
+		Self.x = j.GetFloat("x")
+		Self.y = j.GetFloat("y")
+		Self.w = j.GetFloat("w")
+		Self.h = j.GetFloat("h")
+
+		Self.Text = j.GetString("Text", "")
+		Self.Visible = j.GetBool("Visible", True)
+		Self.Enabled = j.GetBool("Enabled", True)
+	End Method
+
+	'Summary:  Spawns a new Widget.	
+	Method Spawn:Widget(json:String)
+		'Override this method to allow spawning of derived types.
+		Local out:= New Widget()
+		out.UnpackJSON(json)
+		Return out
 	End Method
 End Class
