@@ -2,7 +2,7 @@ Import mojo
 Import brl.json
 
 'Summary:  Generic namespace for various SimpleUI functions.
-Class UI
+Class UI Final
 	'Summary:  Returns True if (px, py) are within rect (x,y,w,h).
 	Function WithinRect:Bool(px:Float, py:Float, x:Float, y:Float, w:Float, h:Float)
 		If px >= x And px <= x+w And py >= y And py < y+h Then	Return true Else Return False

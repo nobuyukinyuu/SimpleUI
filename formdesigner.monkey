@@ -48,7 +48,6 @@ Class Game Extends App
 		
 		Unpacker.Init()
 		testLoader = New WidgetManager(Cursor)
-		testLoader.Attach(New PushButton(0, 0, 4, 4, Cursor))
 	End Method
 	
 	Method OnUpdate:Int()

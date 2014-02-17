@@ -7,7 +7,7 @@ Import Scrollers
 Import textbox
 
 'Summary:  Singleton class providing a way to easily unpack widgets from a JSON file to a WidgetManager.
-Class Unpacker
+Class Unpacker Final
 	Global ValidTypes:StringMap<Widget>
 	Global defaultType:String = "widget"
 	
