@@ -55,7 +55,13 @@ Class ScrollablePanel Extends Widget
 		
 		Return id
 	End Method
-	
+
+	Method DetachAll:Void()
+		WidgetsByID.Clear()
+		Widgets.Clear()
+	End Method
+			
+		
 	Method MouseHit:Void()
 		'First touch.  Set origin to this location.  Set the scroll origin for the first time, also.
 		firstX = Input.x; firstY = Input.y

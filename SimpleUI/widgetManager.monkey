@@ -56,6 +56,13 @@ Class WidgetManager
 		Return id
 	End Method
 	
+	Method DetachAll:Void()
+		WidgetsByName.Clear()
+		WidgetsByID.Clear()
+		Widgets.Clear()
+	End Method
+	
+	
 	'Summary:  Polls all widgets attached to this manager.
 	Method PollAll:Void(xOffset:Float = 0, yOffset:Float = 0)
 		If Enabled = False Then Return
