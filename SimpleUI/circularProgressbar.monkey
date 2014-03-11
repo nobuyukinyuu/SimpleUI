@@ -32,30 +32,30 @@ Class CircularProgressBar
 		quad[3].SetHandle(0, 0)
 	End Method
 	
-	Method Render:Void(x:Float, y:Float)
+	Method Render:Void(x:Float, y:Float, scl:Float = 1.0)
 		If CloverLeaf
-			DrawQuad(0, x, y, Percent)
-			DrawQuad(1, x, y, Percent)
-			DrawQuad(2, x, y, Percent)
-			DrawQuad(3, x, y, Percent)
+			DrawQuad(0, x, y, Percent, scl)
+			DrawQuad(1, x, y, Percent, scl)
+			DrawQuad(2, x, y, Percent, scl)
+			DrawQuad(3, x, y, Percent, scl)
 		Else
 		
 			Local quadrant:Int = Min(3.0, Percent * 4)  'returns 0-3
 			Select quadrant
 			 Case 0
-			 	DrawQuad(0, x, y, Percent / 0.25)
+			 	DrawQuad(0, x, y, Percent / 0.25, scl)
 			 Case 1
-				DrawQuad(0, x, y)
-			 	DrawQuad(1, x, y, (Percent - 0.25) / 0.25)
+				DrawQuad(0, x, y, scl)
+			 	DrawQuad(1, x, y, (Percent - 0.25) / 0.25, scl)
 			 Case 2
-				DrawQuad(0, x, y)
-				DrawQuad(1, x, y)
-			 	DrawQuad(2, x, y, (Percent - 0.5) / 0.25)
+				DrawQuad(0, x, y, scl)
+				DrawQuad(1, x, y, scl)
+			 	DrawQuad(2, x, y, (Percent - 0.5) / 0.25, scl)
 			 Case 3
-				DrawQuad(0, x, y)
-				DrawQuad(1, x, y)
-				DrawQuad(2, x, y)
-			 	DrawQuad(3, x, y, (Percent - 0.75) / 0.25)
+				DrawQuad(0, x, y, scl)
+				DrawQuad(1, x, y, scl)
+				DrawQuad(2, x, y, scl)
+			 	DrawQuad(3, x, y, (Percent - 0.75) / 0.25, scl)
 			End Select
 		
 		
@@ -63,12 +63,12 @@ Class CircularProgressBar
 	End Method
 	
 	'Summary:  Draw full quadrants
-	Method DrawQuad:Void(quadrant:Int, x:Float, y:Float)
-		DrawImage(quad[quadrant], x, y)
+	Method DrawQuad:Void(quadrant:Int, x:Float, y:Float, scl:Float)
+		DrawImage(quad[quadrant], x, y, 0, scl, scl)
 	End Method
 
 	'Summary:  Draw partial quadrant
-	Method DrawQuad(quadrant:Int, x:Float, y:Float, Percent:Float)
+	Method DrawQuad(quadrant:Int, x:Float, y:Float, Percent:Float, scl:Float)
 		UI.PushScissor()
 		Select quadrant
 			Case 0
@@ -81,7 +81,7 @@ Class CircularProgressBar
 				xfScissor(x, y, r, r) 'LR Quadrant 3
 		End Select
 			
-			DrawImage(quad[quadrant], x, y, 90 - (90 * Percent), 1, 1)
+			DrawImage(quad[quadrant], x, y, 90 - (90 * Percent), scl, scl)
 			UI.PopScissor()
 	End Method
 		
