@@ -105,7 +105,9 @@ Class Game Extends App
 		widgets.RenderAll()
 						
 		SetAlpha(0.4)
+		If myPanel.childInput.inPanel Then SetColor(0, 255, 0)
 		DrawCircle(Cursor.x, Cursor.y, 8)
+		SetColor(255, 255, 255)
 		SetAlpha(1)
 		
 		Local m:Float[] = GetMatrix()

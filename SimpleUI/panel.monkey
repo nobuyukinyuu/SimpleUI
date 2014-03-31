@@ -177,6 +177,9 @@ Class ScrollablePanel Extends Widget
 		'Update the scrolling status.
 		Scrolling = ( Not clickStart) And Not (xMomentum = 0 And yMomentum = 0)
 		childInput.scrolling = Scrolling
+		
+		'Update the status of the cursor inside the panel.
+		childInput.inPanel = UI.WithinRect(childInput.p.x, childInput.p.y, x, y, w, h)
 
 		'Poll the child widgets.		
 		If Enabled
@@ -230,7 +233,8 @@ Class PanelPointer Implements InputPointer
 	Field p:InputPointer
 
 	Field scrolling:Bool
-		
+	Field inPanel:Bool
+			
 	Method New(prototype:InputPointer)
 		p = prototype
 	End Method
@@ -248,12 +252,12 @@ Class PanelPointer Implements InputPointer
 	
 	'No Set methods;  These properties are read-only
 	Method Hit:Bool() Property
-		If Not scrolling Then Return p.Hit()
+		If ( Not scrolling) And inPanel Then Return p.Hit()
 	End Method
 	Method Down:Bool() Property
-		If Not scrolling Then Return p.Down()
+		If ( Not scrolling) And inPanel Then Return p.Down()
 	End Method
 	Method Up:Bool() Property
-		If Not scrolling Then Return p.Up()
+		If ( Not scrolling) And inPanel Then Return p.Up()
 	End Method	
 End Class

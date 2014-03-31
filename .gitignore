@@ -1,5 +1,5 @@
 # Ignore the build folder
-/*.build/
+/*.build*/
 
 # Ignore the docs folder
 /*.docs/
