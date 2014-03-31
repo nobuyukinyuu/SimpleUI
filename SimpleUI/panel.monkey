@@ -215,6 +215,19 @@ Class ScrollablePanel Extends Widget
 		'Note: You can call Super before or after your code, depending on where in the render order you want child widgets to render.
 	End Method
 
+	'Summary:  Attempts to detach a widget from this panel.
+	Method Remove:Bool(id:Int)
+		Local w:Widget = WidgetsByID.Get(id)
+		If w <> Null
+			WidgetsByID.Remove(id)
+			Widgets.RemoveEach(w)
+			Return True
+		Else
+			Print("Panel:  Warning, widget " + id + " not found.")
+			Return False
+		End If
+	End Method		
+	
 	'Summary:  Returns the position of the scrollable area as a percentage of its bounds (for scrollbars). 
 	Method PercentX:Float() Property
 		If __endlessX Then Return - 1
