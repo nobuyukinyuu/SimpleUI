@@ -65,6 +65,12 @@ Class UI Final
 		Return startValue + (endValue - startValue) * percent
 	End
 	
+	'Summary:  Returns a value between 0-1 based on testValue.
+	Function Normalize:Float(testValue:Float, startValue:Float, endValue:Float, clamp:Bool = True)
+		If clamp Then Return Clamp( (testValue - startValue) / (endValue - startValue), 0.0, 1.0)
+		Return (testValue - startValue) / (endValue - startValue)
+	End Function
+	
 	'Summary:  Generates a unique ID for widgets.
 	Function GenerateID:Int(salt:Int)
 		'To generate a unique ID, we must find a number that's unlikely to be repeated no matter how many widgets we add here.
