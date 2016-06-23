@@ -15,7 +15,8 @@ SimpleUI is a basic, portable, and modular UI library for Monkey.  It serves as 
 * Circular ProgressBar
 * Scroller ListBoxes with click/slide support
 * Looping Scroller panels (EndlessScroller)
-* 2d Scrolling panels (ScrollablePanel)  **(New)**
+* 2d Scrolling panels (ScrollablePanel)  
+* Color wheel picker (CircularPicker)  **(New)**
 
 ##Planned improvements
 ###Coded, but not included yet
