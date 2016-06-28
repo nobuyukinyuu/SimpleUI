@@ -18,8 +18,8 @@ Class CircularPicker Extends PushButton
 		Const DRAG_NONE = 0
 
   		
-	Method New(x:Float, y:Float, w:Float, h:Float, Input:InputPointer)
-		Super.New(x, y, w, h, Input)
+	Method New(x:Float, y:Float, size:Float, Input:InputPointer)
+		Super.New(x + size / 2, y + size / 2, size, size, Input)
 		
 		GenIndicatorImage()
 	End Method
