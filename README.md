@@ -2,14 +2,14 @@ SimpleUI is a basic, portable, and modular UI library for Monkey.  It serves as 
 
 ![](http://i.imgur.com/acs0W74.png)
 
-##Features
+## Features
 * Input and interface are separate, allowing (in theory) any control scheme.
 * Skinnable (actually, most widgets have no default look!)
 * Poll-based refreshing
 * Batch widget management
 * Plays nice global matrix scaling
 
-##Widgets
+## Widgets
 * Push button
 * Text box
 * Circular ProgressBar
@@ -18,8 +18,8 @@ SimpleUI is a basic, portable, and modular UI library for Monkey.  It serves as 
 * 2d Scrolling panels (ScrollablePanel)  
 * Color wheel picker (CircularPicker)  **(New)**
 
-##Planned improvements
-###Coded, but not included yet
+## Planned improvements
+### Coded, but not included yet
 * OptionList
 * Linear ProgressBar
 * Slider
@@ -27,12 +27,12 @@ SimpleUI is a basic, portable, and modular UI library for Monkey.  It serves as 
 * Toggle button (Checkbox)
 * Knob (circular progressbar + toggle)
 
-###Not yet coded
+### Not yet coded
 * Multitouch support
 * Widget: OptionTable (2d optionlist)
 * WidgetManager: automatic reflow support
 
-##Donate
+## Donate
 If you like this project, please consider giving a small donation to support further development.
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=RHZMPB4RL3T82&lc=US&item_name=Nobu%27s%20Monkey%2dX%20projects&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted)
